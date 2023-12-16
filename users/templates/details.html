@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block title %}POST Details{% endblock title %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div style="width: 70%; margin: auto">
+    <div class="row mt-5  d-flex align-items-center">
+        <div class="col-6">
+            <img src="{{object.image.url}}" class="card-img-top mb-3" alt="user image">
+        </div>
+        <div class="col-6 ml-3">
+          <h4 class="card-title">Name :- {{object.title}}</h4>
+          <h6 class="card-text">Price :- {{object.price}}$</h6>
+          <h6 class="card-text">Quantity :- {{object.quantity}}</h6>
+          <h6 class="card-text">Brand :- {{object.brand}}</h6>
+          <p class="card-title">Details: {{object.description}}</p>
+          {% if request.user.is_authenticated %}
+          <a class="btn btn-primary mt-3" href="{% url 'buy_car' car.id %}">Buy now</a>
+         
+          {% endif %}
+        </div>
+
+
+    </div>
+</div>
+
+
+<div class="card container mt-5 mb-5 pt-3 bg-body-secondary">
+    <h5>Total comments : {{comments | length}}</h5>
+    <div class="card-body">
+      {% for c in comments %}
+      <div class="card text-center m-3">
+        <div class="card-header">
+           {{c.name}}
+        </div>
+        <div class="card-body">
+           <p class="card-text">{{c.body}}</p>
+         
+        </div>
+        <div class="card-footer text-body-secondary">
+          {{c.created_on}}
+        </div>
+      </div>
+
+      {% endfor %}
+    </div>
+  </div>
+
+<div class="card container mt-5 mb-5 bg-body-secondary">
+    <div class="card-body">
+      
+      <h1>Add comments</h1>
+      <form method="post">
+          {% csrf_token %}
+          {{comment_form | crispy}}
+          <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+    </div>
+  </div>
+
+  
+{% endblock content %}

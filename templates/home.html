@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Home page{% endblock title %}
+
+{% block content %}
+<div class="container mb-5">
+    <div class="row mt-5  d-flex align-items-center">
+        <div class="col-6">
+            <h1 class="p-5">DJANGO CAR SALES CENTER</h1>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci quisquam laudantium porro, magnam nobis quo veritatis ad, consequuntur sit necessitatibus cumque blanditiis impedit voluptate culpa repellat eum, quidem incidunt cum officiis odio magni deserunt? Animi obcaecati reprehenderit natus, blanditiis ipsa, tenetur repudiandae, commodi facere unde assumenda asperiores facilis et qui!</p>
+        </div>
+        <div class="col-6 ml-3">
+            <img class="img-fluid" src="{% static 'home.jpg' %}" alt="">
+        </div>
+    
+    </div>
+
+</div>
+<div class="container text-center">
+    <a  class="btn btn-primary m-4" href="{% url 'home' %}">ALL</a>
+    {% for i in brand %}
+ 
+        <a href="{% url 'brand_car' i.slug %}" class="btn btn-primary m-4">{{i.name}}</a>
+
+    {% endfor %}
+</div>
+
+<div class="container mb-5">
+        <button class="px-5 py-2 mb-4 btn btn-success text-white">{{data | length}} result found</button>
+        <div class="row gap-5">
+            {% for i in data %}
+                <div class="card" style="width: 18rem;">
+                    <img src="{{i.image.url}}" class="card-img-top pt-2" alt="user image">
+                    <div class="card-body">
+                        <h4 class="card-title">Name : {{i.title}}</h4>
+                        <h5>Price : {{i.price}} </h5>
+                        <h5>Brand : {{i.brand}} </h5>
+                        <h5>Quantity : {{i.quantity}} </h5>
+                        <p class="card-text">{{i.description | truncatewords:10}}</p>
+                        <a href="{% url 'car_details_view' i.id %}" class="btn btn-primary">Details</a>
+                    </div>
+                </div>
+            {% endfor %}
+                
+        </div>
+    </div>
+    
+
+</div>
+
+
+
+{% endblock content %}

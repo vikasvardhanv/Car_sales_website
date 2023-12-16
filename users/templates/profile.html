@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block title %}Profile page{% endblock title %}
+{% block content %}
+<div class="container mb-5">
+    <h1>This is profile page</h1>
+    <a class="btn btn-primary" href="{% url 'edit_profile' %}">Edit your profile</a>
+</div>
+
+
+<div class="container mb-5">
+    <div class="row gap-5">
+        {% for i in order %}
+            <div class="card" style="width: 18rem;">
+                <img src="{{i.car.image.url}}" class="card-img-top pt-2" alt="user image">
+                <div class="card-body">
+                    <h4 class="card-title">Name : {{i.car.title}}</h4>
+                    <h5>Price : {{i.car.price}} </h5>
+                    <h5>Brand : {{i.car.brand}} </h5>
+                    <p class="card-text">{{i.car.description | truncatewords:10}}</p>
+                    <a href="{% url 'car_details_view' i.id %}" class="btn btn-primary">Details</a>
+                </div>
+            </div>
+        {% endfor %}
+            
+    </div>
+</div>
+
+
+
+
+
+{% endblock content %}
