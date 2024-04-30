@@ -1,3 +1,14 @@
+# How to run this project: 
+# Create VENV:
+python3 -m cartest .carte
+source .cartest/bin/activate
+# Install dependencies: 
+pip install django
+pip install django-crispy-forms
+pip install crispy-bootstrap5
+# Run the script
+python3 manage.py runserver
+
 
 # Car sell  Project
 
